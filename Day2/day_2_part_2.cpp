@@ -4,23 +4,42 @@
 using namespace std;
 typedef long long ll;
 
-bool isvalid(string num){
-    int n = num.size();
-    if(n % 2){
-        return true;
-    }
+
+bool isposible(string& p , string& s){
+    int m = p.size();
+    int n = s.size();
+    if(n % m)return false;
     int l = 0;
-    int ls = n/2;
-    string lstr = num.substr(0 , ls);
-    string rstr = num.substr(ls);
-    return lstr != rstr;
+    while(l <= n - m){
+        string sub = s.substr(l , m);
+        if(sub != p)return false;
+        l += m;
+    }
+    return true;
+
+}
+bool invalid(string s){
+    int n = s.size();
+    int r = 1;
+    while(r < n){
+       if(s[0] == s[r]){
+          string ls = s.substr(0,r);
+          if(isposible(ls,s)){
+              return true;
+          }
+       }
+       r++;
+    }
+    return false;
 }
 ll solve(ll L , ll R){
     ll number = L;
     ll result = 0;
     while(number <= R){
-        if(!isvalid(to_string(number))){
+ 
+        if(invalid(to_string(number))){
             result += number;
+            // cout << number << endl;
         }
         number++;
     }
@@ -28,7 +47,7 @@ ll solve(ll L , ll R){
 }
 void solve()
 {
-    ifstream file("input1.txt");
+    ifstream file("input.txt");
     string content , token;
     if (!file)
     {

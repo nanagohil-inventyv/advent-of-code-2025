@@ -6,7 +6,7 @@ typedef long long ll;
 
 void solve()
 {
-    ifstream file("Day1\\input1.txt");
+    ifstream file("Day1\\input.txt");
     if (!file)
     {
         cout << "File not found!" << endl;
